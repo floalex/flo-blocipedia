@@ -30,7 +30,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'capybara'
   gem 'database_cleaner'
-  gem 'factory_girl_rails', '~> 4.0'
+  gem 'factory_girl_rails', '~> 4.0', :require => false #install after migrate devise:user
   gem 'pry-rails'
 end
 
