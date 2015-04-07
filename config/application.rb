@@ -24,6 +24,6 @@ module Blocipedia
     config.active_record.raise_in_transactional_callbacks = true
 
     # To enable the functionality of serving assests
-    config.serve_static_assets = true
+    config.serve_static_files = true
   end
 end
