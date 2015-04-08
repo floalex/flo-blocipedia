@@ -1,3 +1,21 @@
-/// "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+/* universal */
+
+body {
+  padding-top: 60px;
+  margin-left: 60px;
+  margin-right: 60px;
+}
+
+/* user-info */
+.user-info {
+   margin-top: 10px;
+ }
+ 
+ .nav {
+   margin-top: 10px;
+ }
+
+ @import "welcome";
