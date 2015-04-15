@@ -1,21 +1,23 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-/* universal */
-
-body {
-  padding-top: 80px;
-  margin-left: 60px;
-  margin-right: 80px;
+.user-info {
+  padding-top: 8px;
 }
 
-/* user-info */
-.user-info {
-   margin-top: 10px;
- }
- 
- .nav {
-   margin-top: 10px;
- }
+.nav {
+  margin-top: 10px;
+}
+
+
+h2 {
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+  color: $gray-dark;
+}
+
+
 
  @import "welcome";
