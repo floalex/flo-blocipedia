@@ -1,17 +1,39 @@
-<h1>All Wikis</h1>
+<div class="containter">
+<h1 class="center">All Wikis</h1>
+
+</br>
+</br>
 <div class="row">
-<div class="col-md-8">
+<div class="col-md-6 col-md-offset-3">
+
 <% @wikis.each do |wiki| %>
  <div class="media">
    <div class="midia-body">
-    <h4 class="media-heading">
-      <%= link_to wiki.title, wiki %>
+    
+      <table class="table table-condensed">
+        <tr>
+         <td><%= link_to wiki.title, wiki %></td>
+         <% if policy(wiki).edit? %>
+         <td><%= link_to "Edit", edit_wiki_path(wiki) %></td>
+         <% end %>
+         <% if policy(wiki).destroy? %>
+         <td><%= link_to "Delete", wiki, method: :delete, data: { confirm: "Are you sure?" } %></td>
+         <% end %>
+        </tr>
+      </table>
+
    </div>
  </div>
 <% end %>
 </div>
-
-<div class="col-md-4">
-  <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-success' %>
+</div>
+    
+</br>
+</br>
+</br> 
+<div class="center row">
+  <% if policy(Wiki.new).create? %>
+  <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-success btn-lg' %>
+  <% end %>
 </div>
 </div>

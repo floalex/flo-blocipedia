@@ -9,10 +9,12 @@ class WikisController < ApplicationController
 
   def new
     @wiki = Wiki.new
+    authorize @wiki
   end
 
   def create
-    @wiki = Wiki.new(wiki_params)
+    @wiki = current_user.wikis.build(wiki_params)
+    authorize @wiki
     if @wiki.save
       flash[:sucess] = "Wiki was sucessfully saved!"
       redirect_to @wiki
@@ -24,18 +26,32 @@ class WikisController < ApplicationController
 
   def edit
     @wiki = Wiki.find(params[:id])
+    authorize @wiki
   end
 
   def update
      @wiki = Wiki.find(params[:id])
+     authorize @wiki
      if @wiki.update_attributes(wiki_params)
        flash[:notice] = "Wiki was updated."
        redirect_to @wiki
      else
        flash[:error] = "There was an error saving the wiki. Please try again."
-       render :edit
+       render :show
      end
    end
+
+   def destroy
+      @wiki = Wiki.find(params[:id])
+
+      if @wiki.destroy
+        flash[:notice] = "\"#{@wiki.title}\" was deleted sucessfully."
+        redirect_to wikis_path
+      else
+        flash[:error] = "Unable to delte wiki, please try again."
+        render :show
+      end
+    end
 
   private
 
