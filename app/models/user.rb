@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_many :wikis, dependent: :destroy
 
   after_initialize do |user|
-    user.role = 'standard'
+    user.role == 'standard'
   end
   
 
