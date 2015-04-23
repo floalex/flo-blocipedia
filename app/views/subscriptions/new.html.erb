@@ -1,0 +1,21 @@
+<%= form_tag subscriptions_path do |f| %>
+  <% if subscription.errors.any? %>
+    <div class="error_messages">
+      <h2><%= pluralize(@subscription.errors.count, "error") %> prohibited this subscription from being saved:</h2>
+      <ul>
+      <% @subscription.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <h3>Subscribe for premium plan now</h3>
+  <h4>Free trial period: 30 days</4h>
+   <script class='stripe-button' 
+      src="https://checkout.stripe.com/checkout.js" 
+      data-key="<%= @stripe_btn_data[:key] %>" 
+      data-amount=<%= @stripe_btn_data[:amount] %> 
+      data-description="<%= @stripe_btn_data[:description] %>" ></script>
+  
+<% end %>

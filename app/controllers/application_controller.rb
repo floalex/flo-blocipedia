@@ -13,4 +13,12 @@ class ApplicationController < ActionController::Base
    def configure_permitted_parameters
      devise_parameter_sanitizer.for(:sign_up) << :name
    end
+
+   def update_user_to_premium
+    current_user.update_attributes(role: "premium")
+   end
+
+   def downgrade_user_to_standard
+    current_user.update_attributes(role: "standard")
+   end
 end

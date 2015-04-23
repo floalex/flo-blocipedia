@@ -40,6 +40,14 @@ require 'faker'
  )
  member.skip_confirmation!
  member.save!
+
+ member2 = User.new(
+   name:     'Member User2',
+   email:    'member2@example.com',
+   password: 'helloworld'
+ )
+ member2.skip_confirmation!
+ member2.save!
  
  puts "Seed finished"
  puts "#{User.count} users created"

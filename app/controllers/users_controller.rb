@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-   
+    @wikis = @user.wikis
     
   end
  
@@ -22,6 +22,6 @@ class UsersController < ApplicationController
    private
  
    def user_params
-     params.require(:user).permit(:name)
+     params.require(:user).permit(:name, :private)
    end
  end

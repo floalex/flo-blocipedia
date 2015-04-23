@@ -5,10 +5,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
   
   has_many :wikis, dependent: :destroy
+  has_one :subscription
 
-  after_initialize do |user|
-    user.role == 'standard'
-  end
+  after_initialize :default_role
   
 
   def admin?
@@ -17,6 +16,14 @@ class User < ActiveRecord::Base
 
   def premium?
     role == 'premium'
+  end
+
+  def standard?
+    role == 'standard'
+  end
+
+  def default_role
+    self.role ||= "standard"
   end
 
 end

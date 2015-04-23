@@ -1,12 +1,24 @@
 <div class="row">
- <div class="col-md-8">
+ <div class="center col-md-12">
    
      <div class="media-body">
        <h2 class="media-heading"><%= @user.name %></h2>
-       
+       <h3><%= @user.role %><h3>
+  
+        <%= pluralize(@user.wikis.count, 'wiki') %>
+      
      </div>
  
  </div>
 </div>
 
 </br>
+
+<div class="row">
+  <%= render @wikis %>
+</div>
+
+</br>
+<% if current_user.premium? %>
+   <%= link_to "Cancel Subscription", downgrade_path %>
+<% end %>
