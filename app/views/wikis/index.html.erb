@@ -13,10 +13,10 @@
       <table class="table table-condensed">
         <tr>
          <td><%= link_to wiki.title, wiki %></td>
-         <% if policy(wiki).edit? %>
+         <% if current_user && policy(wiki).edit? %>
          <td><%= link_to "Edit", edit_wiki_path(wiki) %></td>
          <% end %>
-         <% if policy(wiki).destroy? %>
+         <% if current_user && policy(wiki).destroy? %>
          <td><%= link_to "Delete", wiki, method: :delete, data: { confirm: "Are you sure?" } %></td>
          <% end %>
         </tr>

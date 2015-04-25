@@ -20,5 +20,6 @@
 
 </br>
 <% if current_user.premium? %>
-   <%= link_to "Cancel Subscription", downgrade_path, method: :get %>
+   <%= link_to "Cancel Subscription", downgrade_path, method: :get %>:
+   Warning: All of your private wikis will become public after you downgrade to Standard level!
 <% end %>

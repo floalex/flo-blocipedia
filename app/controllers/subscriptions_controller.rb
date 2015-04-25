@@ -35,9 +35,9 @@ class SubscriptionsController < ApplicationController
     end
 
     subscription.stripe_id = stripe_sub.id
-
+    subscription.user = current_user # connect sucription with user.id
     subscription.save!
-    
+  
     update_user_to_premium
     flash[:success] = "Thank you for your subscription!"
     
@@ -51,9 +51,8 @@ class SubscriptionsController < ApplicationController
   
 
   def downgrade
-    subscription = Subscription.find(params[:id])
-    user = subscription.user
-    customer = Stripe::Customer.retrieve(user.stripe_customer_id)
+    subscription = current_user.subscription # call subscription with user.id
+    customer = Stripe::Customer.retrieve(current_user.stripe_customer_id)
     stripe_sub = customer.subscriptions.retrieve(subscription.stripe_id)
     stripe_sub.delete
     if subscription.delete
@@ -65,4 +64,5 @@ class SubscriptionsController < ApplicationController
       redirect_to root_path
     end
   end
+
 end
