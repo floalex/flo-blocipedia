@@ -43,7 +43,7 @@ class WikisController < ApplicationController
 
    def destroy
       @wiki = Wiki.find(params[:id])
-
+      authorize @wiki
       if @wiki.destroy
         flash[:notice] = "\"#{@wiki.title}\" was deleted sucessfully."
         redirect_to wikis_path

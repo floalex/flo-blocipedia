@@ -1,5 +1,5 @@
 <%= form_tag subscriptions_path do |f| %>
-  <% if subscription.errors.any? %>
+  <% if @subscription.errors.any? %>
     <div class="error_messages">
       <h2><%= pluralize(@subscription.errors.count, "error") %> prohibited this subscription from being saved:</h2>
       <ul>

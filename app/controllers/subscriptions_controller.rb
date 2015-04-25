@@ -14,7 +14,8 @@ class SubscriptionsController < ApplicationController
   end
 
   def create
-    subscription = Subscription.new
+      subscription = Subscription.new
+
       stripe_sub = nil
     if current_user.stripe_customer_id.blank?
       # Creates a Stripe Customer object, for associating with the charge
@@ -33,10 +34,10 @@ class SubscriptionsController < ApplicationController
         )
     end
 
-    current_user.subid = stripe_sub.id
+    subscription.stripe_id = stripe_sub.id
 
-    current_user.subscription.save!
-
+    subscription.save!
+    
     update_user_to_premium
     flash[:success] = "Thank you for your subscription!"
     
@@ -45,19 +46,23 @@ class SubscriptionsController < ApplicationController
     # Handle exceptions
     rescue Stripe::CardError => e
      flash[:error] = e.message
-     redirect_to new_subscriptions_path
+     redirect_to user_path
   end
   
 
   def downgrade
-    @user = current_user
-
-    customer = Stripe::Customer.retrieve(id: @user.stripe_customer_id)
-    customer.subscriptions.retrieve(@user.subid).delete
-    
-       downgrade_user_to_standard
-       flash[:success] = "Sorry to see you go."
-       redirect_to user_path(current_user)
-
+    subscription = Subscription.find(params[:id])
+    user = subscription.user
+    customer = Stripe::Customer.retrieve(user.stripe_customer_id)
+    stripe_sub = customer.subscriptions.retrieve(subscription.stripe_id)
+    stripe_sub.delete
+    if subscription.delete
+      downgrade_user_to_standard
+      flash[:success] = "Sorry to see you go."
+      redirect_to user_path(current_user)
+    else
+      flash[:error] = "Can't downgrade at this moment."
+      redirect_to root_path
+    end
   end
 end

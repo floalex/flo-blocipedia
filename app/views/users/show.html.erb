@@ -20,5 +20,5 @@
 
 </br>
 <% if current_user.premium? %>
-   <%= link_to "Cancel Subscription", downgrade_path %>
+   <%= link_to "Cancel Subscription", downgrade_path, method: :get %>
 <% end %>
