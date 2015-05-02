@@ -19,10 +19,17 @@ class ApplicationController < ActionController::Base
    end
 
    def update_user_to_premium
-    current_user.update_attributes(role: "premium")
+     current_user.update_attributes(role: "premium")
    end
 
    def downgrade_user_to_standard
-    current_user.update_attributes(role: "standard")
+     current_user.update_attributes(role: "standard")
    end
+
+   def current_user_downgrade_wikis
+    privatewikis = current_user.wikis.where(:private, true)
+    privatewikis.each do |privatewiki|
+      privatewiki.update_attributes(:private, false)
+    end
+   end 
 end

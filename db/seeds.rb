@@ -48,7 +48,25 @@ require 'faker'
  )
  member2.skip_confirmation!
  member2.save!
- 
+
+ standard1 = User.new(
+  name:       'standard1',
+  email:      'standard1@example.com',
+  password:   'helloworld'
+)
+standard1.skip_confirmation!
+standard1.save!
+
+premium1 = User.new(
+  name:       'premium1',
+  email:      'premium1@example.com',
+  password:   'helloworld',
+  role:       'premium'
+)
+premium1.skip_confirmation!
+premium1.save!
+
+
  puts "Seed finished"
  puts "#{User.count} users created"
  puts "#{Wiki.count} wikis created"

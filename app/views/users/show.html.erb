@@ -3,7 +3,7 @@
    
      <div class="media-body">
        <h2 class="media-heading"><%= @user.name %></h2>
-       <h3><%= @user.role %><h3>
+       <h4><%= @user.role %><h4>
   
         <%= pluralize(@user.wikis.count, 'wiki') %>
       
@@ -14,11 +14,15 @@
 
 </br>
 
-<div class="row">
+<div class="center row">
   <%= render @wikis %>
 </div>
 
 </br>
+
+<% if current_user.standard? %>
+   <%= link_to "Get a premium subscription", new_subscription_path %>: Get 30 days free trial!
+<% end %>
 <% if current_user.premium? %>
    <%= link_to "Cancel Subscription", downgrade_path, method: :get %>:
    Warning: All of your private wikis will become public after you downgrade to Standard level!

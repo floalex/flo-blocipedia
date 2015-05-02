@@ -57,6 +57,7 @@ class SubscriptionsController < ApplicationController
     stripe_sub.delete
     if subscription.delete
       downgrade_user_to_standard
+      current_user_downgrade_wikis
       flash[:success] = "Sorry to see you go."
       redirect_to user_path(current_user)
     else

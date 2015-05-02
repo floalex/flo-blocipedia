@@ -1,0 +1,6 @@
+<% @users.each do |user| %>
+      <div class="add-collaborator email"><%= user.email %></div>
+      <div class="add-collaborator link">
+        <%= link_to "Add as collaborator", collaborators_path(@wiki, @user), method: :post %>
+      </div>
+<% end %>

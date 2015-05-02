@@ -1,3 +1,5 @@
+require 'factory_girl_rails'
+
 FactoryGirl.define do
   factory :user do
     name "Douglas Adams"
@@ -6,4 +8,5 @@ FactoryGirl.define do
      password_confirmation "helloworld"
      confirmed_at Time.now
   end
+
 end

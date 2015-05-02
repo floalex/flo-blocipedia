@@ -1,0 +1,26 @@
+<% provide(:title, @title) %>
+<div class="row">
+ <div class="col-md-6">
+  <h2>Current Collaborators</h2>
+    <ul class="current-collaborators">
+    <% if @collaborators.any? %>
+    <%= render @collaborators %>
+    <% end %>
+    </ul>
+ </div>
+
+ <div class="col-md-6">
+   <h2>Add a collaborator</h2>
+     <div class="new-collaborator">
+       <%= form_tag(create_wikis_collaborator_path, id: "search-form", class: "center") do %>
+       <p>
+        <%= text_field_tag :email, placeholder: "email" %>
+        <%= submit_tag "Submit", :name => nil %>
+       </p>
+       <% end %>
+       
+   
+ </div>
+</div>
+
+

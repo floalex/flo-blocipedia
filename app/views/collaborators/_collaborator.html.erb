@@ -1,0 +1,6 @@
+<div class="media-body">
+   <%= collaborator.user.name %> added <%= time_ago_in_words(collaborator.created_at) %> ago
+   <% if (@wiki.user == current_user || current_user.admin?) %>
+     | <%= link_to "Remove collaborator", wiki_collaborator_path(@wiki, collaborator), data: { confirm: "Are you sure?" },method: :delete %>
+   <% end %>
+</div>

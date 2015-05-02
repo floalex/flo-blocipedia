@@ -1,13 +1,18 @@
 class UsersController < ApplicationController
-   before_action :authenticate_user!
+   before_action :authenticate_user!, except: [:show, :index]
 
- 
+ def index
+   if params[:search]
+     @users = User.search(params[:search]).order("created_at DESC")
+   else
+     @users = User.all.order('created_at DESC')
+   end
+ end
 
-  def show
+ def show
     @user = User.find(params[:id])
-    @wikis = @user.wikis
-    
-  end
+    @wikis = @user.wikis.visible_to(current_user)
+ end
  
    def update
      if current_user.update_attributes(user_params)

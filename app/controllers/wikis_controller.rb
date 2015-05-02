@@ -1,6 +1,6 @@
 class WikisController < ApplicationController
   def index
-    @wikis = Wiki.visible_to(current_user).paginate(page: params[:page], per_page: 10)
+    @wikis = policy_scope(Wiki)
   end
 
   def show
@@ -15,6 +15,7 @@ class WikisController < ApplicationController
 
   def create
     @wiki = current_user.wikis.build(wiki_params)
+    @wiki.user = current_user
     authorize @wiki
     if @wiki.save
       flash[:sucess] = "Wiki was sucessfully saved!"
@@ -27,6 +28,8 @@ class WikisController < ApplicationController
 
   def edit
     @wiki = Wiki.find(params[:id])
+    @collaborate_users = User.all.select { |user| user != current_user }
+    @collaborators = @wiki.collaborate_users
     authorize @wiki
   end
 
@@ -53,6 +56,12 @@ class WikisController < ApplicationController
         render :show
       end
     end
+
+   def collaborators
+     @wiki = Wiki.find(params[:id])
+     @collaborators = @wiki.collaborators
+     render 'collaborators/show_form'
+   end
 
   private
 
