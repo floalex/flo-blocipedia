@@ -31,11 +31,5 @@ class User < ActiveRecord::Base
     self.role ||= "standard"
   end
 
-  def add_user(other_user)
-    collaborators.create(user_id: other_user.id)
-  end
-
-  def remove_user(other_user)
-    collaborators.find_by(user_id: other_user.id).destroy
-  end
+  
 end

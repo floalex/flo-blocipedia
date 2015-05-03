@@ -12,14 +12,14 @@ class CollaboratorsController < ApplicationController
   end
 
   def destroy
-    @collaborate_user = Collaborator.find(params[:id])
+    @collaborate_user = @wiki.collaborators.find(params[:id])
     if @collaborate_user.destroy
         flash[:notice] = "Collaborator removed"
         redirect_to wiki_path(@wiki)
-      else
+    else
         flash[:error] = "There was an error. Please try again."
         redirect_to edit_wiki_path(@wiki)
-      end
+    end
   end
 
   def find_wiki_user
