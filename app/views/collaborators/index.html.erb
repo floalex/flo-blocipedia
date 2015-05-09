@@ -12,7 +12,7 @@
      <div class="new-collaborator">
        <%= form_tag(wiki_collaborators_path(@wiki.id), id: "search-form", class: "center") do %>
        <p>
-        <%= text_field_tag :email, placeholder: "email" %>
+        <%= text_field_tag :email, nil, placeholder: "email" %>
         <%= submit_tag "Submit", :name => nil %>
        </p>
        <% end %>

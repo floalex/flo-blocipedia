@@ -1,6 +1,6 @@
 class WikisController < ApplicationController
   def index
-    @wikis = policy_scope(Wiki)
+    @wikis = policy_scope(Wiki).paginate(page: params[:page])
   end
 
   def show
